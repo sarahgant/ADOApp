@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ADOApp/static/css/main.34eb79ef.css",
+    "main.js": "/ADOApp/static/js/main.523a81c1.js",
+    "static/js/942.e820436f.chunk.js": "/ADOApp/static/js/942.e820436f.chunk.js",
+    "index.html": "/ADOApp/index.html",
+    "main.34eb79ef.css.map": "/ADOApp/static/css/main.34eb79ef.css.map",
+    "main.523a81c1.js.map": "/ADOApp/static/js/main.523a81c1.js.map",
+    "942.e820436f.chunk.js.map": "/ADOApp/static/js/942.e820436f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.34eb79ef.css",
+    "static/js/main.523a81c1.js"
+  ]
+}
