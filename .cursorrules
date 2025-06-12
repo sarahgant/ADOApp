@@ -1,0 +1,171 @@
+# Core Operating Principles
+**MANDATORY**: Use sequential thinking tool for complex problems before implementation.
+
+## Primary Directives
+- **Root Cause First**: Fix underlying issues, never just symptoms
+- **Test-Driven**: Write tests FIRST, then code to pass them
+- **Clean Code**: Follow SOLID principles, clear separation of concerns
+- **User-Friendly**: Explain everything in non-technical terms
+- **Proactive**: Suggest improvements beyond immediate requirements
+- **API-First**: ALL data operations and calculations happen server-side via API calls
+
+# Project Structure
+```
+project-root/
+├── .cursorrules
+├── docs/
+│   ├── architecture.mermaid    # System design
+│   ├── technical.md            # Technical specs
+│   ├── status.md              # Progress tracking
+│   └── api/
+│       └── ado-analytics-api.md # ADO Analytics API reference
+├── tasks/tasks.md              # Development tasks
+├── tests/                      # Test files by feature
+└── src/                        # Source code
+```
+
+## Startup Protocol
+1. READ `@{docs/architecture.mermaid}` - understand system
+2. CHECK `@{docs/status.md}` - current progress
+3. REVIEW `@{tasks/tasks.md}` - active requirements
+4. **MANDATORY**: REFERENCE `@{docs/ado-analytics-api.md}` - for ALL ADO API operations and calculations
+
+# Development Workflow
+
+## TDD Process (MANDATORY)
+1. **Write Tests**: Cover happy paths, edge cases, errors, security
+2. **Run Tests**: Ensure they fail initially
+3. **Implement**: Write minimal code to pass
+4. **Refactor**: Improve while maintaining coverage
+5. **Document**: Update status.md with progress
+
+## Code Standards
+- Strict typing (no 'any' in TypeScript)
+- Self-documenting variable names
+- Comprehensive error handling
+- JSDoc for public methods
+- 80%+ test coverage
+
+# Problem Solving
+
+## Sequential Thinking Required For:
+- Architecture decisions
+- Complex bug fixes
+- Performance optimization
+- Security concerns
+- API integration design
+
+## Debug Protocol
+1. **Reproduce** with minimal test case
+2. **Analyze** using sequential thinking
+3. **Fix** root cause
+4. **Test** thoroughly
+5. **Document** solution in status.md
+
+# Communication
+
+## Non-Programmer Guidelines
+- Explain WHAT before HOW
+- Break tasks into steps
+- Avoid jargon
+- Show regular progress
+- Ask when unclear
+
+## Documentation Updates (REQUIRED)
+After EVERY change update:
+- `status.md`: Progress and issues
+- `technical.md`: New patterns/decisions
+- `tasks.md`: Completed items
+
+# Architecture Principles
+
+## Clean Architecture
+- **Single Responsibility**: One purpose per module
+- **Dependency Inversion**: Depend on abstractions
+- **Interface Segregation**: Focused interfaces
+- **Layered**: Presentation → Business → Data
+
+## ADO Analytics Integration (MANDATORY)
+**CRITICAL**: ALL Azure DevOps data operations MUST follow these rules:
+
+### Server-Side Everything - NO Client-Side Processing
+- **ALWAYS** use Analytics OData endpoints for ALL calculations and data operations
+- **ALWAYS** let the API do the work - app should only display results
+- **MANDATORY**: Reference `@{docs/ado-analytics-api.md}` for ALL API operations
+- Use pre-calculated fields: CycleTimeDays, LeadTimeDays, DateSK, StateChangeDate
+
+
+
+### App Responsibility
+- **Display only**: App should only render data received from API
+- **No processing**: No calculations, filtering, sorting, or aggregations in app code
+- **API calls**: All data manipulation happens via API calls
+- **Caching only**: App may cache API responses but never process the data
+
+### Performance Requirements
+- **Analytics service ONLY** for all data operations (never REST API for calculations)
+- **Server-side filtering**: Use $filter, $apply, $orderby in API calls
+- **Specify required fields only**: Never fetch extra data to process client-side
+- **Batch operations**: Multiple items via single API call, not multiple calls
+- **Cache API responses only**: Cache raw API responses, never processed data
+- **Pagination server-side**: Use continuation tokens, never load all data
+- **Respect rate limits**: 200 requests/minute for Analytics
+- **No client-side joins**: Use API relationships and $expand instead
+
+### Mandatory Data Sources
+- **WorkItems**: Current state with pre-calculated metrics
+- **WorkItemSnapshot**: Historical data analysis
+- **WorkItemBoardSnapshot**: Board state tracking
+- Use DateSK (YYYYMMDD integer) for efficient date filtering
+- Leverage IsLastRevisionOfDay for daily snapshots
+
+# Quality Checklist
+
+Before marking complete:
+- [ ] All tests pass
+- [ ] Documentation updated
+- [ ] No security vulnerabilities
+- [ ] Error handling complete
+- [ ] Performance acceptable
+
+# Autonomy Rules
+
+## Proceed Without Asking:
+- Writing/running tests
+- Following established patterns
+- Updating documentation
+- Refactoring with test coverage
+
+## Always Ask Before:
+- Architectural changes
+- API modifications
+- New dependencies
+- Database changes
+- Features not in tasks.md
+- **ANY client-side data processing** (calculations, filtering, sorting, aggregations)
+- **Using REST API instead of Analytics** for data operations
+
+# Context Management
+
+## File References
+Use format: `@{path/to/file}`
+- Current progress: `@{docs/status.md}`
+- Requirements: `@{tasks/tasks.md}`
+- **ADO API specs**: `@{docs/ado-analytics-api.md}` (MANDATORY for ALL calculations)
+
+## Context Recovery
+When hitting limits:
+1. Reference status.md for progress
+2. Check technical.md for guidelines
+3. Review current task in tasks.md
+
+# Success Criteria
+
+Task is DONE when:
+1. **Tests**: Written and passing
+2. **Code**: Clean and documented
+3. **Docs**: All updated
+4. **Quality**: Meets standards
+5. **User**: Has clear guidance
+
+Remember: Quality over speed. Do it right the first time.

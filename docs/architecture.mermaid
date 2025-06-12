@@ -1,0 +1,82 @@
+graph TB
+    subgraph "Presentation Layer"
+        A[React Dashboard Components]
+        B[Error Boundary Components]
+        C[Loading Components]
+        D[Chart Components]
+    end
+    
+    subgraph "Business Logic Layer"
+        E[ADO Service Layer]
+        F[Authentication Service]
+        G[Data Processing Service]
+        H[Error Handling Service]
+    end
+    
+    subgraph "Data Access Layer"
+        I[HTTP Client]
+        J[Token Manager]
+        K[Cache Manager]
+        L[Configuration Manager]
+    end
+    
+    subgraph "External Services"
+        M[Azure DevOps REST API]
+        N[Authentication Provider]
+    end
+    
+    A --> E
+    B --> H
+    C --> E
+    D --> G
+    
+    E --> I
+    F --> J
+    G --> K
+    H --> L
+    
+    I --> M
+    J --> N
+    
+    classDef presentation fill:#e1f5fe
+    classDef business fill:#f3e5f5
+    classDef data fill:#e8f5e8
+    classDef external fill:#fff3e0
+    
+    class A,B,C,D presentation
+    class E,F,G,H business
+    class I,J,K,L data
+    class M,N external
+
+graph TD
+    subgraph User Interface
+        A[Browser] --> B{React App};
+    end
+
+    subgraph App Components
+        B --> C[AppLayout];
+        C --> D[Header];
+        C --> E[Sidebar];
+        C --> F[Main Content];
+    end
+
+    subgraph Features
+        D --> G[Theme Switcher];
+        D --> H[User Settings Link];
+        E --> I[Navigation Links];
+        F --> J[Dashboard Page];
+        F --> K[Settings Page];
+    end
+
+    subgraph State Management
+        L(ThemeContext) --> G;
+        L --> C;
+        M(SettingsContext) --> K;
+    end
+
+    subgraph Data Persistence
+        K --> N[Local Storage];
+    end
+
+    style A fill:#f9f,stroke:#333,stroke-width:2px;
+    style B fill:#ccf,stroke:#333,stroke-width:2px; 
